@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable name="item" type="com.hinuri.unsplashlistproject.item.UnsplashItem"/>
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="16dp"
+              android:layout_margin="8dp"
+              android:elevation="3dp"
+              android:background="#ffffff"
+>
+
+    <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+    app:imageUrl="@{item.urls.thumb}"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:text='@{"like : " + item.likes}'
+    android:layout_marginBottom="8dp"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text='@{"Username : " + item.user.username}'/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text='@{"Twitter_name : " + item.user.twitter_username}'/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text='@{"Bio : " + item.user.bio}'/>
+
+</LinearLayout>
+</layout>
