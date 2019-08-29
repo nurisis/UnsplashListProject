@@ -1,6 +1,5 @@
 package com.hinuri.unsplashlistproject.model
 
-import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.hinuri.unsplashlistproject.Constant
 import com.hinuri.unsplashlistproject.item.UnsplashItem
@@ -23,7 +22,6 @@ class DataSource : PageKeyedDataSource<Int,UnsplashItem>() {
 
         restService?.getUnsplashData(currentPage)!!.enqueue(object : Callback<List<UnsplashItem>> {
             override fun onFailure(call: Call<List<UnsplashItem>>, t: Throwable) {
-
             }
 
             override fun onResponse(call: Call<List<UnsplashItem>>, response: Response<List<UnsplashItem>>) {
@@ -32,6 +30,7 @@ class DataSource : PageKeyedDataSource<Int,UnsplashItem>() {
         })
     }
 
+    // After first load
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, UnsplashItem>) {
 
         restService?.getUnsplashData(params.key)!!.enqueue(object : Callback<List<UnsplashItem>> {
@@ -42,12 +41,14 @@ class DataSource : PageKeyedDataSource<Int,UnsplashItem>() {
                 callback.onResult(response.body() as MutableList<UnsplashItem>, params.key+1)
             }
         })
+
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, UnsplashItem>) {
     }
 
 
+    // Create a retrofit instance
     fun getRetrofit() : Retrofit{
         val client = OkHttpClient.Builder().build()
         val retrofit = Retrofit.Builder().baseUrl(Constant.UNSPLASH_BASE_URL)
